@@ -1,0 +1,15 @@
+---
+shell_brew_packages:
+  - git
+  - vim
+  - curl
+  - jq
+  - tmux
+  - tree
+  - openssl
+  - vim
+  - wget
+  - yamllint
+shell_brew_cask_packages:
+  - iterm2
+  - keepassx
