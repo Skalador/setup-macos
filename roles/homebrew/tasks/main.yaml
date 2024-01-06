@@ -20,8 +20,8 @@
 # On ARM macOS, this script installs to /opt/homebrew only
 # On Intel macOS, this script installs to /usr/local only
 - name: Installing Homebrew
-  command: |
-    /usr/bin/ruby -e "$(curl -fsSL 
+  command: >-
+    /usr/bin/ruby -e "$(curl -fsSL\
     https://raw.githubusercontent.com/Homebrew/install/master/install)"
   when:
     - "not homebrew_check_x86.stat.exists"
@@ -29,7 +29,7 @@
 
 - name: Installing Homebrew
   command: |
-    /usr/bin/ruby -e "$(curl -fsSL 
+    /usr/bin/ruby -e "$(curl -fsSL\
     https://raw.githubusercontent.com/Homebrew/install/master/install)"
   when:
     - "not homebrew_check_arm.stat.exists"
