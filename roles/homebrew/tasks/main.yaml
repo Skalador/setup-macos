@@ -1,16 +1,17 @@
 ---
 - name: Check CPU chip architecture for arm64 or x86_64
   ansible.builtin.command: /usr/bin/uname -m
+  changed_when: false
   register: cpu_arch_output
 
 - name: Display CPU architecture
   ansible.builtin.debug:
     var: cpu_arch_output.stdout
 
-- name: Ensuring Homebrew is installed on x86
-  ansible.builtin.stat:
-    path: /usr/local/bin/brew
-  register: homebrew_check_x86
+# - name: Ensuring Homebrew is installed on x86
+#   ansible.builtin.stat:
+#     path: /usr/local/bin/brew
+#   register: homebrew_check_x86
 
 - name: Ensuring Homebrew is installed on arm
   ansible.builtin.stat:
@@ -19,13 +20,13 @@
 
 # On ARM macOS, this script installs to /opt/homebrew only
 # On Intel macOS, this script installs to /usr/local only
-- name: Installing Homebrew
-  ansible.builtin.command: >-
-    /usr/bin/ruby -e "$(curl -fsSL\
-    https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  when:
-    - "not homebrew_check_x86.stat.exists"
-    - "'x86_64' in cpu_arch_output.stdout"
+# - name: Installing Homebrew
+#   ansible.builtin.command: >-
+#     /usr/bin/ruby -e "$(curl -fsSL\
+#     https://raw.githubusercontent.com/Homebrew/install/master/install)"
+#   when:
+#     - "not homebrew_check_x86.stat.exists"
+#     - "'x86_64' in cpu_arch_output.stdout"
 
 - name: Installing Homebrew
   ansible.builtin.command: |
@@ -36,7 +37,7 @@
     - "'arm64' in cpu_arch_output.stdout"
 
 - name: Run 'which brew' command
-  # changed_when: False
+  changed_when: false
   ansible.builtin.command: which brew
   register: which_brew
 

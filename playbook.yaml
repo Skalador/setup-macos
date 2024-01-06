@@ -1,5 +1,6 @@
 ---
-- hosts: localhost
+- name: configure host.
+  hosts: localhost
   connection: local
   vars_files:
     - vars/shell_packages.yaml
