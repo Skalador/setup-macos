@@ -1,5 +1,5 @@
 ---
-- name: configure host.
+- name: Configure host.
   hosts: localhost
   connection: local
   vars_files:
