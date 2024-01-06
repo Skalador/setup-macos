@@ -1,13 +1,12 @@
----
 - hosts: localhost
   connection: local
   vars_files:
     - vars/shell_packages.yaml
   roles:
-  - homebrew
-#  - shell
-#  - zsh
-#  - dev
-#  - cloud_providers
-#  - kubernetes
-#  - openshift
+    - homebrew
+#    - shell
+#    - zsh
+#    - dev
+#    - cloud_providers
+#    - kubernetes
+#    - openshift
