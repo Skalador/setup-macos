@@ -1,13 +1,13 @@
 ---
 name: CI
-on:
+'on':   # Single quotes for yamllint
   pull_request:
     branches:
       - main
   push:
     branches:
       - main
-  schedule: # Schedule for every 10th of a month at 5AM
+  schedule:   # Schedule for every 10th of a month at 5AM
     - cron: '0 5 10 * *'
 
 jobs:
@@ -39,8 +39,8 @@ jobs:
       matrix:
         os:
           - macos-12
-#          - macos-13
-#          - macos-14
+          # - macos-13
+          # - macos-14
 
     steps:
       - name: Check out the codebase.
@@ -57,17 +57,7 @@ jobs:
 
       - name: Run bootstrap script.
         run: ./bootstrap.sh
-#        run: |
-#          sudo pip3 install --upgrade pip
-#          sudo pip3 install ansible
 
-#      - name: Set up the test environment.
-#        run: |
-#          cp tests/ansible.cfg ./ansible.cfg
-#          cp tests/inventory ./inventory
-#          cp tests/config.yml ./config.yml
-#          ansible-galaxy install -r requirements.yml
-#
       - name: Test the playbook's syntax.
         run: ansible-playbook playbook.yaml --syntax-check
 
@@ -75,13 +65,3 @@ jobs:
         run: ansible-playbook playbook.yaml
         env:
           ANSIBLE_FORCE_COLOR: '1'
-#
-#      - name: Idempotence check.
-#        run: |
-#          idempotence=$(mktemp)
-#          ansible-playbook main.yml | tee -a ${idempotence}
-#          tail ${idempotence} | grep -q 'changed=0.*failed=0' &&
-#          (echo 'Idempotence test: pass' && exit 0)
-#          || (echo 'Idempotence test: fail' && exit 1)
-#        env:
-#          ANSIBLE_FORCE_COLOR: '1'

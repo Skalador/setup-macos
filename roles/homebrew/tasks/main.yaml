@@ -36,7 +36,7 @@
     - "'arm64' in cpu_arch_output.stdout"
 
 - name: Run 'which brew' command
-  changed_when: False
+  # changed_when: False
   ansible.builtin.command: which brew
   register: which_brew
 
