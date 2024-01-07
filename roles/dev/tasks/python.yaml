@@ -1,16 +1,4 @@
 ---
-- name: Check if Homebrew is installed on x86_64
-  ansible.builtin.stat:
-    path: /usr/local/bin/brew
-  register: homebrew_check_x86_64
-  when: cpu_arch == 'x86_64'
-
-- name: Check if Homebrew is installed on arm64
-  ansible.builtin.stat:
-    path: /opt/homebrew/bin/brew
-  register: homebrew_check_arm64
-  when: cpu_arch == 'arm64'
-
 - name: Install pyenv for macOS
   community.general.homebrew:
     name: pyenv

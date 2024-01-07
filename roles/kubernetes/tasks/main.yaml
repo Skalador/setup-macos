@@ -1,43 +1,7 @@
 ---
-- name: Check if Homebrew is installed on x86_64
-  ansible.builtin.stat:
-    path: /usr/local/bin/brew
-  register: homebrew_check_x86_64
-  when: cpu_arch == 'x86_64'
-
-- name: Check if Homebrew is installed on arm64
-  ansible.builtin.stat:
-    path: /opt/homebrew/bin/brew
-  register: homebrew_check_arm64
-  when: cpu_arch == 'arm64'
-
-- name: Install kubernetes components for macOS
-  community.general.homebrew:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - kubectl
-    - minikube
-    - skopeo
-    - helm
-  register: result
-  until: result is successful
-  when: "(homebrew_check_x86_64.stat.exists | default(false) or homebrew_check_arm64.stat.exists | default(false))"
-
-- name: Display Homebrew Packages result
-  ansible.builtin.debug:
-    msg: "{{ result }}"
-
-- name: Install kubernetes cask components for macOS
-  community.general.homebrew_cask:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - docker
-  register: result
-  until: result is successful
-  when: "(homebrew_check_x86_64.stat.exists | default(false) or homebrew_check_arm64.stat.exists | default(false))"
-
-- name: Display Homebrew Cask Packages result
-  ansible.builtin.debug:
-    msg: "{{ result }}"
+- include_tasks: homebrew_check.yaml
+- include_tasks: kubectl.yaml
+- include_tasks: minikube.yaml
+- include_tasks: skopeo.yaml
+- include_tasks: helm.yaml
+- include_tasks: docker.yaml

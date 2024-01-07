@@ -1,4 +1,5 @@
 ---
+- include_tasks: homebrew_check.yaml
 - include_tasks: vscode.yaml
 - include_tasks: python.yaml
 - include_tasks: go.yaml

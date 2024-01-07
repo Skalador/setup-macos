@@ -1,8 +1,10 @@
 ---
-- name: Install go for macOS
+- name: Install Minikube for macOS
   community.general.homebrew:
-    name: go
+    name: "{{ item }}"
     state: present
+  with_items:
+    - minikube
   register: result
   until: result is successful
   when: "(homebrew_check_x86_64.stat.exists | default(false) or homebrew_check_arm64.stat.exists | default(false))"

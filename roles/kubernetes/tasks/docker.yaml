@@ -1,12 +1,14 @@
 ---
-- name: Install go for macOS
-  community.general.homebrew:
-    name: go
+- name: Install Docker for macOS
+  community.general.homebrew_cask:
+    name: "{{ item }}"
     state: present
+  with_items:
+    - docker
   register: result
   until: result is successful
   when: "(homebrew_check_x86_64.stat.exists | default(false) or homebrew_check_arm64.stat.exists | default(false))"
 
-- name: Display Homebrew Packages result
+- name: Display Homebrew Cask Packages result
   ansible.builtin.debug:
     msg: "{{ result }}"
