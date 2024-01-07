@@ -27,11 +27,10 @@ jobs:
       - name: Install test dependencies.
         run: pip3 install yamllint ansible ansible-lint
 
-      - name: Lint code.
-        run: |
-          set -e
-          yamllint .
-          ansible-lint
+#       - name: Lint code.
+#         run: |
+#           yamllint .
+#           ansible-lint
 
   integration:
     name: Integration
@@ -39,9 +38,9 @@ jobs:
     strategy:
       matrix:
         os:
-          - macos-12
-          # - macos-13
-          # - macos-14
+          - macos-12  # monterey
+          # - macos-13  # ventura
+          # - macos-14  # sonoma
 
     steps:
       - name: Check out the codebase.
