@@ -39,7 +39,7 @@
 # On ARM macOS, this script installs to /opt/homebrew only
 # On Intel macOS, this script installs to /usr/local only
 - name: Installing Homebrew
-  ansible.builtin.command: '/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
+  ansible.builtin.shell: '/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
   when:
     - "not (homebrew_check_x86_64.stat.exists | default(false) and homebrew_check_arm64.stat.exists | default(false))"
 
