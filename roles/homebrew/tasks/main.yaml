@@ -45,7 +45,7 @@
 
 - name: Run 'which brew' command
   changed_when: false
-  ansible.builtin.command: which brew
+  ansible.builtin.command: which brew || true
   register: which_brew
 
 - name: Display where 'brew' is installed
