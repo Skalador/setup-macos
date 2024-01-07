@@ -1,2 +1,2 @@
 ---
-  cpu_arch: 'arm64'   # default for todays macs
+cpu_arch: 'arm64'   # default for todays macs
