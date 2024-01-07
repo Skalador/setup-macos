@@ -21,7 +21,7 @@
 
 - name: Display Homebrew Packages result
   ansible.builtin.debug:
-    msg: "{{ result.stdout }}"
+    msg: "{{ result }}"
 
 - name: Installing Homebrew Cask Packages
   community.general.homebrew_cask:
@@ -33,4 +33,4 @@
 
 - name: Display Homebrew Cask Packages result
   ansible.builtin.debug:
-    msg: "{{ result.stdout }}"
+    msg: "{{ result }}"

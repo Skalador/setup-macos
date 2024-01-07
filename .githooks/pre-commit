@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Check for the existence of yamllint
+if ! command -v yamllint &> /dev/null; then
+    echo "Error: yamllint not found. Please make sure it's installed."
+    exit 1
+fi
+
+# Run yamllint on all YAML files
+yamllint .
+
+# Capture the exit status
+status=$?
+
+# If yamllint finds issues, print an error message and prevent the commit
+if [ $status -ne 0 ]; then
+    echo "YAML linting failed. Please fix the issues before committing."
+    exit 1
+fi
+
+# If all checks pass, allow the commit
+exit 0
