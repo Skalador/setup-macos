@@ -45,9 +45,20 @@
 
 - name: Run 'which brew' command
   changed_when: false
-  ansible.builtin.command: which brew || true
+  ansible.builtin.command: which brew
+  ignore_errors: true
   register: which_brew
 
 - name: Display where 'brew' is installed
   ansible.builtin.debug:
     msg: "'brew' is installed to: {{ which_brew.stdout }}"
+
+- name: Run 'brew --version' command
+  changed_when: false
+  ansible.builtin.command: brew --version
+  ignore_errors: true
+  register: brew_version
+
+- name: Display which version of 'brew' is installed
+  ansible.builtin.debug:
+    msg: "'brew' is installed with version: {{ brew_version.stdout }}"

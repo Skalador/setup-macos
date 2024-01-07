@@ -30,7 +30,7 @@ jobs:
       - name: Lint code with yamllint.
         run: |
           yamllint .
-      
+
       - name: Lint code with ansible-lint.
         run: |
           ansible-lint
