@@ -25,6 +25,10 @@
   register: homebrew_check
   when: cpu_arch == 'arm64'
 
+- name: Display Homebrew check
+  ansible.builtin.debug:
+    var: homebrew_check
+
 # On ARM macOS, this script installs to /opt/homebrew only
 # On Intel macOS, this script installs to /usr/local only
 - name: Installing Homebrew
