@@ -16,25 +16,32 @@
 - name: Check if Homebrew is installed on x86_64
   ansible.builtin.stat:
     path: /usr/local/bin/brew
-  register: homebrew_check
+  register: homebrew_check_x86_64
   when: cpu_arch == 'x86_64'
 
 - name: Check if Homebrew is installed on arm64
   ansible.builtin.stat:
     path: /opt/homebrew/bin/brew
-  register: homebrew_check
+  register: homebrew_check_arm64
   when: cpu_arch == 'arm64'
 
-- name: Display Homebrew check
+- name: Display Homebrew check for x86_64
   ansible.builtin.debug:
-    var: homebrew_check
+    var: homebrew_check_x86_64
+  when: cpu_arch == 'x86_64'
+
+- name: Display Homebrew check for arm64
+  ansible.builtin.debug:
+    var: homebrew_check_arm64
+  when: cpu_arch == 'arm64'
+
 
 # On ARM macOS, this script installs to /opt/homebrew only
 # On Intel macOS, this script installs to /usr/local only
 - name: Installing Homebrew
   ansible.builtin.command: '/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
   when:
-    - "not homebrew_check.stat.exists"
+    - "not (homebrew_check_x86_64.stat.exists | default(false) and homebrew_check_arm64.stat.exists | default(false))"
 
 - name: Run 'which brew' command
   changed_when: false
