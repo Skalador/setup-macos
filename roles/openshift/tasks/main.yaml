@@ -1,6 +1,6 @@
 ---
 - include_tasks: homebrew_check.yaml
-- include_tasks: openshift-cli.yaml
+- include_tasks: oc.yaml
 # - include_tasks: oc-mirror.yaml
 - include_tasks: podman.yaml
 - include_tasks: butane.yaml
