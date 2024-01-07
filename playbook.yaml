@@ -11,5 +11,5 @@
     - zsh
     - dev
 #    - cloud_providers
-#    - kubernetes
-#    - openshift
+    - kubernetes
+    - openshift
