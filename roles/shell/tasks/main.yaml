@@ -1,0 +1,28 @@
+---
+- name: Check if Homebrew is installed on x86_64
+  ansible.builtin.stat:
+    path: /usr/local/bin/brew
+  register: homebrew_check_x86_64
+  when: cpu_arch == 'x86_64'
+
+- name: Check if Homebrew is installed on arm64
+  ansible.builtin.stat:
+    path: /opt/homebrew/bin/brew
+  register: homebrew_check_arm64
+  when: cpu_arch == 'arm64'
+
+- name: Installing Homebrew Packages
+  community.general.homebrew:
+    name: "{{ shell_brew_packages }}"
+    state: present
+  register: result
+  until: result is successful
+  when: "not (homebrew_check_x86_64.stat.exists | default(false) or homebrew_check_arm64.stat.exists | default(false))"
+
+- name: Installing Homebrew Cask Packages
+  community.general.homebrew_cask:
+    name: "{{ shell_brew_cask_packages }}"
+    state: present
+  register: result
+  until: result is successful
+  when: "not (homebrew_check_x86_64.stat.exists | default(false) and homebrew_check_arm64.stat.exists | default(false))"

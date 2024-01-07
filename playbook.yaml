@@ -7,7 +7,7 @@
     - vars/shell_packages.yaml
   roles:
     - homebrew
-#    - shell
+    - shell
 #    - zsh
 #    - dev
 #    - cloud_providers

@@ -35,7 +35,6 @@
     var: homebrew_check_arm64
   when: cpu_arch == 'arm64'
 
-
 # On ARM macOS, this script installs to /opt/homebrew only
 # On Intel macOS, this script installs to /usr/local only
 - name: Installing Homebrew
@@ -52,7 +51,6 @@
 - name: Run 'which brew' command
   changed_when: false
   ansible.builtin.command: which brew
-  ignore_errors: true
   register: which_brew
 
 - name: Display where 'brew' is installed
@@ -62,7 +60,6 @@
 - name: Run 'brew --version' command
   changed_when: false
   ansible.builtin.command: brew --version
-  ignore_errors: true
   register: brew_version
 
 - name: Display which version of 'brew' is installed
