@@ -1,0 +1,5 @@
+---
+- include_tasks: homebrew_check.yaml
+- include_tasks: awscli.yaml
+- include_tasks: azcli.yaml
+- include_tasks: gcloudcli.yaml
