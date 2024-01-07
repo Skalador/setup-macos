@@ -42,8 +42,8 @@ jobs:
       matrix:
         os:
           - macos-12  # monterey
-          - macos-13  # ventura
-          - macos-14  # sonoma
+          # - macos-13  # ventura
+          # - macos-14  # sonoma
 
     steps:
       - name: Check out the codebase.

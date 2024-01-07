@@ -1,0 +1,4 @@
+---
+- include_tasks: vscode.yaml
+- include_tasks: python.yaml
+- include_tasks: go.yaml

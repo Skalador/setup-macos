@@ -8,8 +8,8 @@
   roles:
     - homebrew
     - shell
-#    - zsh
-#    - dev
+    - zsh
+    - dev
 #    - cloud_providers
 #    - kubernetes
 #    - openshift
