@@ -46,7 +46,7 @@
 
 - name: Display Homebrew installation
   ansible.builtin.debug:
-    msg: "{{ which_brew.stdout }}"
+    msg: "{{ brew_install.stdout }}"
 
 
 - name: Run 'which brew' command
