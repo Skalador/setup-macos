@@ -5,6 +5,7 @@
     state: present
   with_items:
     - unzip
+    - gnu-tar
 
 - name: Check if /usr/local/bin/oc-mirror exists
   stat:
@@ -31,7 +32,7 @@
     owner: root
     group: root
     mode: '0755'
-    remote_src: false
+    remote_src: true
 
 - name: Remove file /tmp/oc-mirror.tar.gz
   when: oc_mirror_download_bundle is defined
