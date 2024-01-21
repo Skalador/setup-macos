@@ -6,15 +6,33 @@ if ! command -v yamllint &> /dev/null; then
     exit 1
 fi
 
+# Check for the existence of ansible-lint
+if ! command -v ansible-lint &> /dev/null; then
+    echo "Error: ansible-lint not found. Please make sure it's installed."
+    exit 1
+fi
+
 # Run yamllint on all YAML files
 yamllint .
 
 # Capture the exit status
-status=$?
+yamllint_status=$?
 
 # If yamllint finds issues, print an error message and prevent the commit
-if [ $status -ne 0 ]; then
+if [ $yamllint_status -ne 0 ]; then
     echo "YAML linting failed. Please fix the issues before committing."
+    exit 1
+fi
+
+# Run ansible-lint on all Ansible files
+ansible-lint
+
+# Capture the exit status
+ansible_status=$?
+
+# If ansible-lint finds issues, print an error message and prevent the commit
+if [ $ansible_status -ne 0 ]; then
+    echo "Ansible linting failed. Please fix the issues before committing."
     exit 1
 fi
 
