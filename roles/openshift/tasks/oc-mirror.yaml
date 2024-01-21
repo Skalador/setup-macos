@@ -24,7 +24,7 @@
   when: "not oc_mirror_file_stat.stat.exists"
 
 - name: Extract oc-linux.tar.gz into /tmp/
-  when: oc_mirror_download_bundle.changed
+  when: oc_mirror_download_bundle is defined
   become: true
   ansible.builtin.unarchive:
     src: /tmp/oc-mirror.tar.gz
@@ -35,7 +35,7 @@
     remote_src: true
 
 - name: Remove file /tmp/oc-mirror.tar.gz
-  when: oc_mirror_download_bundle.changed
+  when: oc_mirror_download_bundle is defined
   ansible.builtin.file:
     path: /tmp/oc-mirror.tar.gz
     state: absent
