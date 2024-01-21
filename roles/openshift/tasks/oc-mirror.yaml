@@ -1,6 +1,5 @@
 ---
 - name: Install package dependencies.
-  become: true
   community.general.homebrew:
     name: "{{ item }}"
     state: present
