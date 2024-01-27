@@ -25,11 +25,12 @@
 
 - name: Extract oc-linux.tar.gz into /tmp/
   when: oc_mirror_download_bundle is defined
+  become: true
   ansible.builtin.unarchive:
     src: /tmp/oc-mirror.tar.gz
     dest: /usr/local/bin
-    owner: "{{ ansible_env.USER }}"   # cannot use {{ ansible_user }} for localhost
-    group: "{{ ansible_env.USER }}"   # cannot use {{ ansible_user }} for localhost
+    owner: root
+    group: admin
     mode: '0755'
     remote_src: true
 
