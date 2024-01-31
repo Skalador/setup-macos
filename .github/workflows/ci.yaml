@@ -42,7 +42,7 @@ jobs:
       matrix:
         os:
           - macos-12  # monterey
-          # - macos-13  # ventura
+          - macos-13  # ventura
           # - macos-14  # sonoma
 
     steps:
@@ -58,13 +58,7 @@ jobs:
           sudo rm -rf /Applications/Google\ Chrome.app
           sudo rm -rf /usr/local/bin/firefox
 
-      - name: Run bootstrap script.
-        run: ./bootstrap.sh
-
-      - name: Test the playbook's syntax.
-        run: ansible-playbook playbook.yaml --syntax-check
-
       - name: Test the playbook.
-        run: ansible-playbook playbook.yaml
+        run: make run
         env:
           ANSIBLE_FORCE_COLOR: '1'
