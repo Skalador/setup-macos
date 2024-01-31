@@ -4,6 +4,7 @@ Ansible Playbooks for setting up a DevOps focused workstation on MacOS.
 
 The current version of this playbook is tested via Github actions, i.e. on `x86` hardware. This is due to the fact, that I do not have Apple hardware available. The following OS versions are currenlty tested:
 - macos-12  # Monterey
+- macos-13  # Ventura
 
 ## TL;DR
 
@@ -13,11 +14,8 @@ Run the following:
 # Clone to your home directory
 git clone https://github.com/Skalador/setup-macos.git
 
-# Installs ansible and dependencies
-sudo ./bootstrap.sh
-
-# Run the playbook
-ansible-playbook -K playbook.yaml
+# Installs dependencies and run the playbook
+make run
 ```
 
 ## What do you get?
