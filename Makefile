@@ -11,6 +11,6 @@ ansible: playbook.yaml
 
 .PHONY: lint
 
-lint: playbook.yaml
+lint: .yamllint .ansible-lint
 	yamllint .
 	ansible-lint
