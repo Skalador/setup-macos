@@ -1,3 +1,10 @@
+.PHONY: help
+
+help:
+	@echo "make run 				Run bootstrap script and playbook."
+	@echo "make lint				Lint all YAML files."
+	@echo "make help				Show help."
+
 .PHONY: run
 
 run: bootstrap ansible
