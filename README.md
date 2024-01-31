@@ -14,7 +14,7 @@ Run the following:
 # Clone to your home directory
 git clone https://github.com/Skalador/setup-macos.git
 
-# Installs dependencies and run the playbook
+# Install dependencies and run the playbook
 make run
 ```
 
