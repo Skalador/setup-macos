@@ -9,6 +9,7 @@
     - homebrew
     - shell
     - zsh
+    - office_tools
     - dev
     - cloud_providers
     - kubernetes
