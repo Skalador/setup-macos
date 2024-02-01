@@ -47,6 +47,49 @@
   ansible.builtin.debug:
     msg: "{{ brew_install.stdout }}"
 
+- name: Add Homebrew to PATH on arm64
+  ansible.builtin.shell: |
+    HOMEBREW_PREFIX="/opt/homebrew"
+    case "${SHELL}" in
+      */bash*)
+          shell_rcfile="${HOME}/.bash_profile"
+        ;;
+      */zsh*)
+          shell_rcfile="${ZDOTDIR:-"${HOME}"}/.zprofile"
+        ;;
+      */fish*)
+        shell_rcfile="${HOME}/.config/fish/config.fish"
+        ;;
+      *)
+        shell_rcfile="${ENV:-"${HOME}/.profile"}"
+        ;;
+    esac
+
+    (echo; echo 'eval "\$(${HOMEBREW_PREFIX}/bin/brew shellenv)"') >> ${shell_rcfile}
+    eval "\$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
+  when: brew_install.changed and homebrew_check_arm64.stat.exists | default(false)
+
+- name: Add Homebrew to PATH on x86_64
+  ansible.builtin.shell: |
+    HOMEBREW_PREFIX="/usr/local"
+    case "${SHELL}" in
+      */bash*)
+          shell_rcfile="${HOME}/.bash_profile"
+        ;;
+      */zsh*)
+          shell_rcfile="${ZDOTDIR:-"${HOME}"}/.zprofile"
+        ;;
+      */fish*)
+        shell_rcfile="${HOME}/.config/fish/config.fish"
+        ;;
+      *)
+        shell_rcfile="${ENV:-"${HOME}/.profile"}"
+        ;;
+    esac
+
+    (echo; echo 'eval "\$(${HOMEBREW_PREFIX}/bin/brew shellenv)"') >> ${shell_rcfile}
+    eval "\$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
+  when: brew_install.changed and homebrew_check_x86_64.stat.exists | default(false)
 
 - name: Run 'which brew' command
   changed_when: false
