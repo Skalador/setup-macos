@@ -40,10 +40,11 @@
 - name: Installing Homebrew
   ansible.builtin.shell: '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
   when:
-    - "not (homebrew_check_x86_64.stat.exists | default(false) and homebrew_check_arm64.stat.exists | default(false))"
+    - "(not (homebrew_check_x86_64.stat.exists | default(false)) and cpu_arch == 'x86_64') or (not (homebrew_check_arm64.stat.exists | default(false)) and cpu_arch == 'arm64')"
   register: brew_install
 
 - name: Display Homebrew installation
+  when: brew_install.changed
   ansible.builtin.debug:
     msg: "{{ brew_install.stdout }}"
 
