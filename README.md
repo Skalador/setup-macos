@@ -1,4 +1,7 @@
 # Setup
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/Skalador/setup-macos/ci.yaml?branch=main&event=push&label=CI)
+![GitHub License](https://img.shields.io/github/license/Skalador/setup-macos)
+
 
 Ansible Playbooks for setting up a DevOps focused workstation on MacOS.
 
