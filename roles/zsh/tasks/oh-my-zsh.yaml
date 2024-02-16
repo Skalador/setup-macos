@@ -1,0 +1,17 @@
+---
+- name: Run shell command to check shell environment
+  ansible.builtin.shell: echo $SHELL
+  register: shell_output
+
+- name: Display shell environment
+  ansible.builtin.debug:
+    msg: "Current shell environment is {{ shell_output.stdout }}"
+
+- name: Check for oh-my-zsh
+  stat:
+    path: /$HOME/.oh-my-zsh
+  register: ohmyzsh
+
+- name: Install oh-my-zsh
+  shell: bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  when: "(not ohmyzsh.stat.exists) and (current_shell.stdout.find('/bin/zsh') != -1)"

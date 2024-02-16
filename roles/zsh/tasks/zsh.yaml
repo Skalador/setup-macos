@@ -1,0 +1,15 @@
+---
+- name: Install zsh for macOS
+  community.general.homebrew:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - zsh
+    - zsh-syntax-highlighting
+  register: result
+  until: result is successful
+  when: "(homebrew_check_x86_64.stat.exists | default(false) or homebrew_check_arm64.stat.exists | default(false))"
+
+- name: Display Homebrew Packages result
+  ansible.builtin.debug:
+    msg: "{{ result }}"
