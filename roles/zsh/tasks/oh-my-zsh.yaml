@@ -1,11 +1,11 @@
 ---
 - name: Run shell command to check shell environment
   ansible.builtin.shell: echo $SHELL
-  register: shell_output
+  register: current_shell
 
 - name: Display shell environment
   ansible.builtin.debug:
-    msg: "Current shell environment is {{ shell_output.stdout }}"
+    msg: "Current shell environment is {{ current_shell.stdout }}"
 
 - name: Check for oh-my-zsh
   stat:
