@@ -10,6 +10,7 @@ shell_brew_packages:
   - vim
   - wget
   - yamllint
+  - bat
 shell_brew_cask_packages:
   - iterm2
   - keepassx
