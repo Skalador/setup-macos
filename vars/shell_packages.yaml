@@ -11,6 +11,6 @@ shell_brew_packages:
   - wget
   - yamllint
   - bat
+  - watch
 shell_brew_cask_packages:
   - iterm2
-  - keepassx
