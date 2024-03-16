@@ -5,3 +5,5 @@
 - include_tasks: skopeo.yaml
 - include_tasks: helm.yaml
 - include_tasks: docker.yaml
+- include_tasks: kustomize.yaml
+- include_tasks: virtctl.yaml
