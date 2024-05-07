@@ -2,3 +2,6 @@
 - include_tasks: homebrew_check.yaml
 # - include_tasks: keepassxc.yaml
 - include_tasks: certbot.yaml
+- include_tasks: obs.yaml
+- include_tasks: vlc.yaml
+- include_tasks: shotcut.yaml
