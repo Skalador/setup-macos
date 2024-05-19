@@ -7,3 +7,4 @@
 - include_tasks: docker.yaml
 - include_tasks: kustomize.yaml
 - include_tasks: virtctl.yaml
+- include_tasks: kubeseal.yaml
