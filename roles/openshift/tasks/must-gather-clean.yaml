@@ -1,0 +1,41 @@
+---
+- name: Install package dependencies.
+  community.general.homebrew:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - unzip
+    - gnu-tar
+
+- name: Check if /usr/local/bin/must-gather-clean exists
+  stat:
+    path: /usr/local/bin/must-gather-clean
+  register: must_gather_clean_file_stat
+
+- name: Check for must_gather_clean_file_stat
+  ansible.builtin.debug:
+    msg: "Variable must_gather_clean_file_stat contains: {{ must_gather_clean_file_stat }}"
+
+- name: Download must-gather-clean tool for arm64
+  ansible.builtin.get_url:
+    url: "https://github.com/openshift/must-gather-clean/releases/download/v0.0.1/must-gather-clean-darwin-arm64.tar.gz"
+    dest: /tmp/must-gather-clean.tar.gz
+  register: must_gather_clean_download_bundle
+  when: "not must_gather_clean_file_stat.stat.exists"
+
+- name: Extract must-gather-clean.tar.gz into /tmp/
+  when: must_gather_clean_download_bundle.changed
+  become: true
+  ansible.builtin.unarchive:
+    src: /tmp/must-gather-clean.tar.gz
+    dest: /usr/local/bin
+    owner: root
+    group: wheel
+    mode: '0755'
+    remote_src: true
+
+- name: Remove file /tmp/must-gather-clean.tar.gz
+  when: must_gather_clean_download_bundle.changed
+  ansible.builtin.file:
+    path: /tmp/must-gather-clean.tar.gz
+    state: absent
