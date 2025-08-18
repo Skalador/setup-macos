@@ -4,3 +4,4 @@
 - include_tasks: oc-mirror.yaml
 - include_tasks: podman.yaml
 - include_tasks: butane.yaml
+- include_tasks: must-gather-clean.yaml

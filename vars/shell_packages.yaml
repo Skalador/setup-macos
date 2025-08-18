@@ -12,5 +12,7 @@ shell_brew_packages:
   - yamllint
   - bat
   - watch
+  - yq
+  - ipcalc
 shell_brew_cask_packages:
   - iterm2

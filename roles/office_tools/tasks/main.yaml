@@ -5,3 +5,5 @@
 - include_tasks: obs.yaml
 - include_tasks: vlc.yaml
 - include_tasks: shotcut.yaml
+- include_tasks: espanso.yaml
+- include_tasks: wireshark.yaml
